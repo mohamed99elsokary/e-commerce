@@ -1,0 +1,71 @@
+{% extends "base.html" %}{% block title %}bloges{% endblock title %}{% block content %}
+
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="left-sidebar">
+            </div>
+          </div>
+          <div class="col-sm-9">
+            <div class="blog-post-area">
+              <h2 class="title text-center">Latest From our Blog</h2>
+              <!-- start of blog -->
+              {% for  blog in blogs %}
+              
+              
+              <div class="single-blog-post">
+                <h3>{{blog['name']}}</h3>
+                <div class="post-meta">
+                  <ul>
+                    <li><i class="fa fa-user"></i> {{blog['user_name']}}</li>
+                    <li><i class="fa fa-clock-o"></i> {{blog['time']}}</li>
+                    <li><i class="fa fa-calendar"></i> {{blog['date']}}</li>
+                  </ul>
+                  <span>
+                  {% for i in range(blog['rate']) %}
+                    {% if i == 0 or i == 1 or i == 2 or i == 3 or i == 4 or i == 5 %}
+                    <i class="fa fa-star"></i>
+                    {% else %}
+                    <i class="fa fa-star-half-o"></i>
+                    {% endif %}
+                  {% endfor %}
+                  </span>
+                </div>
+                <a href="">
+                  <img src="/static/imgs/blog/{{blog['img']}}" alt="" />
+                </a>
+                <p>
+                  {{blog['content']}}
+                </p>
+                <a class="btn btn-primary" href="/blog/{{blog['id']}}">Read More</a>
+              </div>
+              {% endfor %}
+              <!-- end of blog -->
+
+              <div class="pagination-area">
+                <ul class="pagination">
+                  <li><a href="" class="active">1</a></li>
+                  <li><a href="">2</a></li>
+                  <li><a href="">3</a></li>
+                  <li>
+                    <a href=""><i class="fa fa-angle-double-right"></i></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/price-range.js"></script>
+    <script src="/static/js/jquery.scrollUp.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.prettyPhoto.js"></script>
+    <script src="/static/js/main.js"></script>
+  </body>
+</html>
+{% endblock content %}
