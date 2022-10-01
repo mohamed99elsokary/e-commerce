@@ -30,10 +30,7 @@ def home():
     cur.execute("SELECT * FROM cart WHERE user_id = %s AND closed = 0", (id,))
     products = cur.fetchall()
     total = 0
-    if len(products) == 0:
-        shipping = 0
-    else:
-        shipping = 10
+    shipping = 0 if len(products) == 0 else 10
     for product in products:
         cur.execute("SELECT * FROM products WHERE id = %s", (product["product_id"],))
         data = cur.fetchone()

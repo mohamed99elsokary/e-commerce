@@ -8,10 +8,7 @@ blogs = Blueprint("blogs", __name__)
 
 @blogs.route("/blogs", methods=["POST", "GET"])
 def home():
-    if "loggedin" in session:
-        loggedin = True
-    else:
-        loggedin = False
+    loggedin = "loggedin" in session
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM blogs ")
     blogs = cur.fetchall()

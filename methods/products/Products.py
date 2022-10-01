@@ -8,10 +8,7 @@ Products = Blueprint("Products", __name__)
 
 @Products.route("/Products", methods=["POST", "GET"])
 def main():
-    if "loggedin" in session:
-        loggedin = True
-    else:
-        loggedin = False
+    loggedin = "loggedin" in session
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM products ")
     products = cur.fetchall()
@@ -23,9 +20,7 @@ def main():
         tags = product["tags"]
         tags = json.loads(tags)
 
-        for tag in tags:
-            categorys.append(tag)
-
+        categorys.extend(iter(tags))
     categorys = set(categorys)
     brands = set(brands)
 

@@ -25,14 +25,12 @@ def home(product_id):
                 "UPDATE cart SET quantity = %s  WHERE user_id = %s AND product_id = %s",
                 (quantity, user_id, product_id),
             )
-            mysql.connection.commit()
         else:
             cur.execute(
                 "INSERT INTO cart SET user_id =%s , product_id =%s , quantity = %s",
                 (user_id, product_id, 1),
             )
-            mysql.connection.commit()
-
+        mysql.connection.commit()
     else:
         loggedin = False
     return redirect(url_for("auth.home"))
