@@ -11,10 +11,7 @@ product = Blueprint("product", __name__)
 def home(product_id):
     cur = mysql.connection.cursor()
     product_id = product_id
-    if "loggedin" in session:
-        loggedin = True
-    else:
-        loggedin = False
+    loggedin = "loggedin" in session
     # ----------------------add review
     if request.method == "POST":
         review = request.form.get("review")

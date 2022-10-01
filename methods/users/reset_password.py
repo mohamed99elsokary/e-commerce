@@ -12,7 +12,7 @@ from mail_sender import mail_sender
 reset_password = Blueprint("reset_password", __name__)
 
 @reset_password.route("/users/reset_password" , methods= ["POST"])
-def  home():
+def home():
     #fetching input type
     if (request.content_type == 'application/json'):
         inputt = request.json
@@ -27,11 +27,11 @@ def  home():
     results = cur.fetchall()
     for row in results:
         reset_password = row['reset_password']
-    if (code == None):       
+    if code is None:       
         random_code = (''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(6)))
         cur.execute("UPDATE users SET reset_password = %s  WHERE email = %s" , (random_code,email))
         mysql.connection.commit()
-        
+
         mail = ('''Acasa wants to tell you that :
         this is your reset password code is '''+random_code)
 

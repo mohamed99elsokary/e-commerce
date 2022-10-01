@@ -8,10 +8,7 @@ contact = Blueprint("contact", __name__)
 
 @contact.route("/contact", methods=["POST", "GET"])
 def main():
-    if "loggedin" in session:
-        loggedin = True
-    else:
-        loggedin = False
+    loggedin = "loggedin" in session
     if request.method == "POST":
         inputt = request.form.get
 
@@ -26,7 +23,4 @@ def main():
             (name, email, subject, message),
         )
         mysql.connection.commit()
-        return render_template("contact-us.html", loggedin=loggedin)
-
-    else:
-        return render_template("contact-us.html", loggedin=loggedin)
+    return render_template("contact-us.html", loggedin=loggedin)

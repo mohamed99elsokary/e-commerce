@@ -11,10 +11,7 @@ blog = Blueprint("blog", __name__)
 def home(blog_id):
     cur = mysql.connection.cursor()
     blog_id = blog_id
-    if "loggedin" in session:
-        loggedin = True
-    else:
-        loggedin = False
+    loggedin = "loggedin" in session
     if request.method == "POST":
         comment = request.form.get("comment")
         user_id = session.get("id")
